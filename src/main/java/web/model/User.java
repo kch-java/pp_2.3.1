@@ -18,7 +18,7 @@ public class User {
     private String lastName;
 
     @Column(name = "age")
-    private byte age;
+    private Byte age;
 
     @Column(name = "email")
     private String email;
@@ -26,7 +26,7 @@ public class User {
     public User() {
     }
 
-    public User(String firstName, String lastName, byte age, String email) {
+    public User(String firstName, String lastName, Byte age, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
@@ -57,11 +57,11 @@ public class User {
         this.lastName = lastName;
     }
 
-    public byte getAge() {
+    public Byte getAge() {
         return age;
     }
 
-    public void setAge(byte age) {
+    public void setAge(Byte age) {
         this.age = age;
     }
 
