@@ -27,7 +27,7 @@ public class AppInit extends AbstractAnnotationConfigDispatcherServletInitialize
         return new String[]{"/"};
     }
 
-    /*Для поддержки кириллицы */
+    /* Для поддержки кириллицы */
     @Override
     protected Filter[] getServletFilters() {
         CharacterEncodingFilter filter = new CharacterEncodingFilter();
