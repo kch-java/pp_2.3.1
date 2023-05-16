@@ -10,7 +10,6 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Service
-@Transactional(readOnly = false)
 public class UserServiceImp implements UserService{
 
     private final UserDao userDao;
@@ -21,26 +20,31 @@ public class UserServiceImp implements UserService{
     }
 
     @Override
+    @Transactional
     public void add(User user) {
         userDao.add(user);
     }
 
     @Override
+    @Transactional
     public void update(@Valid User user) {
         userDao.update(user);
     }
 
     @Override
+    @Transactional
     public void remove(Long id) {
         userDao.remove(id);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public User getUserById(Long id) {
         return userDao.getUserById(id);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<User> listUsers() {
         return userDao.listUsers();
     }
