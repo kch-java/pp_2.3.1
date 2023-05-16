@@ -1,6 +1,7 @@
 package web.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 @Entity
 @Table(name = "users")
@@ -12,21 +13,34 @@ public class User {
     private Long id;
 
     @Column(name = "name")
+    @Pattern(regexp = "^[a-zA-Zа-яА-Я]{1,25}$",
+            message = "The name must contain from 1 to 25 characters " +
+                    "/ Имя должно содержать от 1 до 25 символов.")
     private String firstName;
 
     @Column(name = "last_name")
+    @Pattern(regexp = "^[a-zA-Zа-яА-Я]{1,25}$",
+            message = "The last name must contain from 1 to 25 characters " +
+                    "/ Фамилия должна содержать от 1 до 25 символов.")
     private String lastName;
 
     @Column(name = "age")
-    private Byte age;
+    @NotNull(message = "Число не должно быть равно null")
+    @Digits(integer = 3, fraction = 0, message = "Age should be / Возраст должен быть от 0 до 122")
+    @Min(value = 0, message = "Age should be / Возраст должен быть >= 0")
+    @Max(value = 122, message = "Age should be / Возраст должен быть < 123")
+    private Integer age;
 
     @Column(name = "email")
+    @Pattern(regexp = "^[_A-Za-z0-9-+]+(\\.[_A-Za-z0-9-]+)*@" +
+                     "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$", message = "Enter a valid email address " +
+            "/ Введите действительный адрес электронной почты")
     private String email;
 
     public User() {
     }
 
-    public User(String firstName, String lastName, Byte age, String email) {
+    public User(String firstName, String lastName, Integer age, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
@@ -57,11 +71,11 @@ public class User {
         this.lastName = lastName;
     }
 
-    public Byte getAge() {
+    public Integer getAge() {
         return age;
     }
 
-    public void setAge(Byte age) {
+    public void setAge(Integer age) {
         this.age = age;
     }
 

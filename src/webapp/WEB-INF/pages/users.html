@@ -9,13 +9,13 @@
     <h1>Users List</h1>
     <table border="1" width="70%">
         <tr>
-            <th width="5%" scope="col">ID</th>
-            <th width="25%" scope="col">First Name</th>
-            <th width="25%" scope="col">Last Name</th>
-            <th width="5%" scope="col">Age</th>
-            <th width="25%" scope="col">Email</th>
-            <th width="5%" scope="col">Edit</th>
-            <th width="10%" scope="col">Delete</th>
+            <th style="width: 5%" scope="col">ID</th>
+            <th style="width: 25%" scope="col">First Name</th>
+            <th style="width: 25%" scope="col">Last Name</th>
+            <th style="width: 5%" scope="col">Age</th>
+            <th style="width: 25%" scope="col">Email</th>
+            <th style="width: 5%" scope="col">Edit</th>
+            <th style="width: 10%" scope="col">Delete</th>
         </tr>
         <tr th:each="user : ${listUsers}">
             <td th:text="${user.id}" style="text-align: center"></td>
@@ -39,18 +39,22 @@
         <tr>
             <td><label for="firstName">First Name:</label></td>
             <td><input type="text" id="firstName" th:field="*{firstName}"/></td>
+            <td><div th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">firstName error</div></td>
         </tr>
         <tr>
             <td><label for="lastName">Last Name:</label></td>
             <td><input type="text" id="lastName" th:field="*{lastName}"/></td>
+            <td><div th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">lastName error</div></td>
         </tr>
         <tr>
             <td><label for="age">Age:</label></td>
-            <td><input type="text" id="age" th:field="*{age}"/></td>
+            <td><input type="number" min="-2147483648" max="2147483647" id="age" th:field="*{age}"/></td>
+            <td><div th:if="${#fields.hasErrors('age')}" th:errors="*{age}">age error</div></td>
         </tr>
         <tr>
             <td><label for="email">Email:</label></td>
             <td><input type="text" id="email" th:field="*{email}"/></td>
+            <td><div th:if="${#fields.hasErrors('email')}" th:errors="*{email}">email error</div></td>
         </tr>
         <tr>
             <td >

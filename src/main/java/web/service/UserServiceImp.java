@@ -6,10 +6,11 @@ import org.springframework.transaction.annotation.Transactional;
 import web.dao.UserDao;
 import web.model.User;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Service
-@Transactional
+@Transactional(readOnly = false)
 public class UserServiceImp implements UserService{
 
     private final UserDao userDao;
@@ -25,7 +26,7 @@ public class UserServiceImp implements UserService{
     }
 
     @Override
-    public void update(User user) {
+    public void update(@Valid User user) {
         userDao.update(user);
     }
 

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import web.model.User;
 import web.service.UserService;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,9 +45,13 @@ public class UsersController {
     }
 
     @PostMapping("/users/add")
-    public String addUser(@ModelAttribute("user") User user) {
+    public String addUser(@ModelAttribute("user") @Valid User user, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "users";
+        } else {
             userService.add(user);
-        return "redirect:/users";
+            return "redirect:/users";
+        }
     }
 
     @GetMapping("/remove/{id}")
@@ -61,8 +67,12 @@ public class UsersController {
     }
 
     @PostMapping("/{id}")
-    public String updateUser(@ModelAttribute("user") User user) {
-        userService.update(user);
-        return "redirect:/users";
+    public String updateUser(@ModelAttribute("user") @Valid User user, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "userupdate";
+        } else {
+            userService.update(user);
+            return "redirect:/users";
+        }
     }
 }
